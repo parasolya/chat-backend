@@ -52,6 +52,7 @@ export const deleteChat = async (req, res) => {
 
 
 export const sendMessage = async (req, res) => {
+
   try {
     const { chatId, message } = req.body;
 
@@ -70,7 +71,10 @@ export const sendMessage = async (req, res) => {
     const botReply = await getRandomQuote();
 
     // Формуємо повідомлення бота
-    const botMessage = { sender: 'Bot', text: botReply };
+    const botMessage = {
+      sender: `${chat.firstName} ${chat.lastName}`,
+      text: botReply,
+    };
 
     // Додаємо нові повідомлення до чату
     chat.messages.push(message, botMessage);
