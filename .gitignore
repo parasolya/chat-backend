@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# .env files (для зберігання змінних середовища, таких як токени)
+.env
+
+# Директорії, що містять компільовані файли
+dist/
+build/
+
+# Логи
+*.log
+
+# Системні файли
+.DS_Store
+Thumbs.db
+
+# IDE специфічні файли
+.vscode/
+.idea/
+
+# Інші файли, що не потрібно відслідковувати
+*.env.local
+*.env.*.local

@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { handleSaveError } from "./hooks.js";
 
 const chatSchema = new mongoose.Schema({
   firstName: String,
@@ -30,6 +31,9 @@ const chatSchema = new mongoose.Schema({
 //   },
 //   { timestamps: true }
 // );
+
+chatSchema.post('save', handleSaveError )
+
 
 const Chat = mongoose.model("Chat", chatSchema);
 

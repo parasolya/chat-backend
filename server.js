@@ -6,6 +6,7 @@ import connectDB from "./config/db.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import { ObjectId } from "mongodb";
 import Chat from "./models/chatModel.js";
+import authRoutes from "./routes/authRoutes.js";
 
 dotenv.config();
 
@@ -13,7 +14,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 };
@@ -25,6 +26,7 @@ app.use(express.json());
 connectDB();
 
 app.use("/api/chats", chatRoutes);
+app.use("/api/auth", authRoutes);
 
 const server = app.listen(port, () => {
   console.log(`Server running on port ${port}`);
