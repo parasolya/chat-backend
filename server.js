@@ -1,14 +1,12 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
+import "dotenv/config";
 import { Server } from "socket.io";
 import connectDB from "./config/db.js";
 import chatRoutes from "./routes/chatRoutes.js";
 import { ObjectId } from "mongodb";
 import Chat from "./models/chatModel.js";
 import authRoutes from "./routes/authRoutes.js";
-
-dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 5000;
