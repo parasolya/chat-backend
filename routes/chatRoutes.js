@@ -1,20 +1,23 @@
 import express from 'express';
 import { getChats, createChat, updateChat, deleteChat, sendMessage } from '../controllers/chatController.js';
+import authenticate from '../middlewares/authenticate.js';
 
-const router = express.Router();
+const chatRouter = express.Router();
 
-router.get('/', getChats);
+chatRouter.use(authenticate);
 
-
-router.post('/', createChat);
-
-
-router.put('/:id', updateChat);
+chatRouter.get('/', getChats);
 
 
-router.delete('/:id', deleteChat);
+chatRouter.post('/', createChat);
 
 
-router.post('/messages', sendMessage);
+chatRouter.put('/:id', updateChat);
 
-export default router;
+
+chatRouter.delete('/:id', deleteChat);
+
+
+chatRouter.post('/messages', sendMessage);
+
+export default chatRouter;
