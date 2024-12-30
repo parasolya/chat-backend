@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { User } from "../models/index.js";
 import ctrlWrapper from "../decorators/ctrlWrapper.js";
-import {HttpError} from "../helpers/index.js";
+import { HttpError } from "../helpers/index.js";
 
 const { JWT_SECRET } = process.env;
 
@@ -14,13 +14,14 @@ const authenticate = async (req, res, next) => {
   }
   try {
     const { id } = jwt.verify(token, JWT_SECRET);
-    const user = await User.findOne(id);
+    const user = await User.findById(id);
     if (!user) {
       throw HttpError(401);
     }
+    req.user = user;
     next();
   } catch {
-    throw HttpError(401);
+    throw HttpError(401, "Invalid token");
   }
 };
 

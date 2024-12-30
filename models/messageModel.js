@@ -1,8 +1,6 @@
 import mongoose from "mongoose";
 import { handleSaveError } from "./hooks";
 
-
-
 const messageSchema = new mongoose.Schema(
   {
     chatId: {
@@ -27,7 +25,7 @@ const messageSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-messageSchema.post('save', handleSaveError )
+messageSchema.post("save", handleSaveError);
 
 const Message = mongoose.model("Message", messageSchema);
 

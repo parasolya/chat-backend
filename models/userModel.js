@@ -8,17 +8,24 @@ const userSchema = new mongoose.Schema({
   },
   lastName: {
     type: String,
-    // required: true,
+    required: true, fa
   },
   email: {
     type: String,
     match: emailRegex,
     unique: true,
-    required: true,
+    required: function () {
+      return !this.isBot;
+    },
+  },
+  isBot: { 
+    type: Boolean, default: false 
   },
   password: {
     type: String,
-    required: true,
+    required: function () {
+      return !this.isBot;
+    },
   },
   status: {
     type: String,
@@ -29,11 +36,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.post("save", handleSaveError);
 
-
-
 const User = mongoose.model("user", userSchema);
-
-
-
 
 export default User;
